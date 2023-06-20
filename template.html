@@ -1,0 +1,691 @@
+
+  <head>
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --light-gray: rgb(230, 230, 230);
+        --text-gray: gray;
+        --primary-color: rgb(215, 66, 91);
+      }
+      hr {
+        color: var(--text-gray);
+      }
+      body {
+        background-color: var(--light-gray);
+        margin: 0;
+        height: 100vh;
+      }
+      header {
+        padding: 1rem;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+      .search-bar {
+        width: 50%;
+      }
+
+      .form-group {
+        float: left;
+        border: none;
+        width: 50%;
+        border-radius: 0.4rem;
+        background: var(--light-gray);
+        display: flex;
+        align-items: center;
+        padding: 0.4rem;
+        /* border-color: transparent; */
+      }
+      .search-prefix {
+        height: 1.6rem;
+        aspect-ratio: 1;
+        color: white;
+      }
+      .form-control {
+        float: left;
+        border: none;
+        padding: 0.2rem;
+        width: 100%;
+        border-radius: 0.2rem;
+        background: var(--light-gray);
+
+        /* border-color: transparent; */
+      }
+      .form-control:focus {
+        outline: none;
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .profile-details {
+        text-align: start;
+      }
+      .circle-avatar {
+        width: 2rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+      }
+      .heading {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .subheading {
+        font-size: 0.7rem;
+        color: var(--text-gray);
+      }
+      main {
+        height: 80vh;
+      }
+      .dashboard {
+        display: grid;
+        grid-template-columns: 20% 50% 30%;
+        height: 80vh;
+      }
+      .card-section {
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        background-color: white;
+        border-radius: 0.4rem;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .main-section {
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        background-color: white;
+        border-radius: 0.4rem;
+      }
+      .sidebar-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+      }
+      .sidebar-body-item {
+        padding: 0.4rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text-gray);
+        cursor: pointer;
+      }
+      .sidebar-body-item.active {
+        color: var(--primary-color);
+        background-color: var(--light-gray);
+        border-radius: 0.4rem;
+      }
+
+      .section-header {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        padding: 0.4rem;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .section-body {
+        overflow-y: auto;
+        flex: 11;
+        padding: 0rem 1rem;
+      }
+      .category {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-radius: 0.4rem;
+      }
+      ::-webkit-scrollbar {
+        margin-top: 2rem;
+        width: 0.3rem;
+        height: 0.3rem;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--text-gray);
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      ::-webkit-scrollbar-track {
+        padding-top: 2rem;
+        background-color: var(--light-gray);
+        border-radius: 2px;
+      }
+
+      .category-card {
+        /* height: 8rem; */
+        display: flex;
+        border-radius: 0.4rem;
+        aspect-ratio: 1;
+        padding: 0.4rem;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        flex-direction: column;
+      }
+      .category-image-fluid {
+        height: 8rem;
+        border-radius: 0.4rem;
+        aspect-ratio: 1;
+      }
+      .product {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+      }
+      .product-card {
+        margin: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        border-radius: 0.4rem;
+        padding: 1rem;
+      }
+      .product-image-fluid {
+        object-fit: fill;
+        height: 5rem;
+        justify-self: center;
+        border-radius: 0.4rem;
+        width: 100%;
+      }
+      .title {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .description {
+        font-size: 0.6rem;
+        color: var(--text-gray);
+      }
+      .fav-icon {
+        position: relative;
+        height: 1rem;
+        aspect-ratio: 1;
+        float: right;
+      }
+
+      table {
+        border: none;
+      }
+      thead {
+        border: none;
+
+        background-color: var(--light-gray);
+      }
+      tbody {
+        /* background-color: var(--light-gray); */
+        /* font-size: 0.8rem; */
+        font-weight: 600;
+      }
+      th {
+        padding: 0.8rem 0.4rem;
+        background-color: var(--light-gray);
+        border: none;
+        border-radius: 0.4rem;
+      }
+      td {
+        text-align: center;
+        padding: 0.4rem;
+      }
+      /* @media screen and (max-width: 576px) {
+        nav {
+          height: 8vh;
+          font-size: 60px;
+        }
+        .dashboard {
+          grid-template-columns: auto;
+        }
+        .sidebar {
+          display: none;
+        }
+        .product {
+          grid-template-columns: 50% 50%;
+        }
+        table {
+          width: 100%;
+        }
+        .cart {
+          overflow: auto;
+        }
+      } */
+      /* @media  screen and (max-width: 768px ) {
+        nav {
+          height: 6vh;
+          font-size: 32px;
+        }
+        .dashboard {
+          grid-template-columns: 100%;
+        }
+        .sidebar {
+          display: none;
+        }
+        .product {
+          grid-template-columns: 100%;
+        }
+        table {
+          width: 100%;
+        }
+        .cart {
+          overflow: auto;
+        }
+        .product-image-fluid {
+          object-fit: fill;
+          height: 24rem;
+          justify-self: center;
+          border-radius: 0.4rem;
+          width: 100%;
+        }
+        .form-control {
+          height: 4rem;
+          font-size: 1.6rem;
+        }
+        .form-group {
+          border: none;
+          width: 100%;
+          border-radius: 0.4rem;
+          background: var(--light-gray);
+          display: flex;
+          align-items: center;
+          padding: 0.4rem;
+          gap: 1rem;
+        }
+        .search-prefix {
+          height: 1.6rem;
+          aspect-ratio: 1;
+          color: white;
+        }
+        .form-control {
+          float: left;
+          border: none;
+          padding: 0.2rem;
+          width: 100%;
+          border-radius: 0.2rem;
+          background: var(--light-gray);
+        }
+       
+        .profile-details {
+          text-align: start;
+        }
+        .circle-avatar {
+          width: 64px;
+        }
+        .heading {
+          font-size: 28px;
+        }
+        .subheading {
+          font-size: 24px;
+        }
+      } */
+
+      @media screen and (max-width: 768px) {
+      }
+      @media screen and (max-width: 992px) {
+      }
+      @media screen and (max-width: 1200px) {
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Logo</div>
+        <div class="search-bar">
+          <div class="form-group">
+            <img
+              src="./search-logo.svg"
+              alt=""
+              class="search-prefix"
+              srcset=""
+            />
+            <input type="text" class="form-control" placeholder="Search..." />
+          </div>
+        </div>
+        <div class="profile">
+          <img src="./profile (1).jpg" class="circle-avatar" alt="" />
+          <div class="profile-details">
+            <div class="heading">Akash Chourasia</div>
+            <div class="subheading">Akash@gmail.com</div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="dashboard">
+        <div class="card-section sidebar">
+          <div class="sidebar-header">Logo</div>
+          <hr />
+          <div class="sidebar-body">
+            <div class="sidebar-body-item">Dashboard</div>
+            <div class="sidebar-body-item active">All Products</div>
+            <div class="sidebar-body-item">Orders</div>
+            <div class="sidebar-body-item">Favorites</div>
+            <div class="sidebar-body-item">New Arrival</div>
+          </div>
+        </div>
+        <div class="card-section">
+          <div class="section-header">
+            <div class="section-title">Print Heads</div>
+            <div class="search-bar">
+              <div class="form-group">
+                <img
+                  src="./search-logo.svg"
+                  alt=""
+                  class="search-prefix"
+                  srcset=""
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search..."
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="section-body">
+            <div class="category">
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+              <div class="category-card">
+                <img
+                  src="./profile (1).jpg"
+                  class="category-image-fluid"
+                  alt=""
+                  srcset=""
+                />
+                <div class="title">Category1</div>
+              </div>
+            </div>
+            <hr />
+            <div class="product">
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+              <div class="product-card">
+                <img class="fav-icon" src="./favroite.png" />
+
+                <img
+                  class="product-image-fluid"
+                  src="./profile (1).jpg"
+                  alt=""
+                />
+                <div class="title">Product 1</div>
+                <div class="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-section cart">
+          <table>
+            <div class="" style="background-color: var(--light-gray)">
+              <thead style="background-color: var(--light-gray)">
+                <tr style="background-color: var(--light-gray)">
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>price</th>
+                  <th></th>
+                </tr>
+              </thead>
+            </div>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="profile">
+                    <img src="./profile (1).jpg" class="circle-avatar" alt="" />
+                    <div class="profile-details">
+                      <div class="heading">Product 1</div>
+                      <div class="subheading">Description 1</div>
+                    </div>
+                  </div>
+                </td>
+                <td>2</td>
+                <td>1200/-</td>
+                <td style="color: var(--primary-color)">X</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="profile">
+                    <img src="./profile (1).jpg" class="circle-avatar" alt="" />
+                    <div class="profile-details">
+                      <div class="heading">Product 2</div>
+                      <div class="subheading">Description 2</div>
+                    </div>
+                  </div>
+                </td>
+                <td>2</td>
+                <td>1200/-</td>
+                <td style="color: var(--primary-color)">X</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="profile">
+                    <img src="./profile (1).jpg" class="circle-avatar" alt="" />
+                    <div class="profile-details">
+                      <div class="heading">Product 3</div>
+                      <div class="subheading">Description 3</div>
+                    </div>
+                  </div>
+                </td>
+                <td>2</td>
+                <td>1200/-</td>
+                <td style="color: var(--primary-color)">X</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
